@@ -1,7 +1,7 @@
 var endTime = function(expr) {
     var time = 0;
     var searcher = function(expr) {
-        if (expr.tag === 'note') {
+        if (expr.tag === 'note' || expr.tag === 'rest') {
             return expr.dur;
         } else if (expr.tag === 'seq') {
             time += searcher(expr.left);
@@ -24,7 +24,7 @@ var compile = function(expr) {
     note = [];
     var compiler = function(start, mus) {
         mus.start = start || 0;
-        if (mus.tag === 'note') {
+        if (mus.tag === 'note' || mus.tag === 'rest') {
             mus.start = start;
             note.push(mus);
         } else {
